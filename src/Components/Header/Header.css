@@ -1,0 +1,50 @@
+header {
+  min-height: 50vh; /* ارتفاع كبير ومناسب (60% من طول الشاشة) */
+  
+  /* تدرج لوني داكن وفخم متناسق مع الدارك مود */
+  background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 100%);
+  
+  /* استخدام Flexbox لتوسيط الصورة في المنتصف تماماً بالطول والعرض */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+
+/* إضافة تأثير توهج (Glow) خلف اللوجو ليعطي لمسة مودرن */
+header::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+  filter: blur(30px);
+  z-index: 0;
+}
+
+/* تنسيق صورة اللوجو */
+header img {
+  max-width: 280px; /* يمكنك زيادة أو تقليل الحجم حسب أبعاد اللوجو الخاص بك */
+  height: auto;
+  position: relative;
+  z-index: 1; /* ليكون اللوجو فوق تأثير التوهج */
+  
+  /* تأثير حركة خفيفة نابضة (Floating) تعطي احترافية للتصميم */
+  animation: floatEffect 4s ease-in-out infinite;
+}
+
+/* كود حركة العوامان (Floating Animation) */
+@keyframes floatEffect {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px); /* يرتفع للأعلى قليلاً */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

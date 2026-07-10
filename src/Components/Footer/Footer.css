@@ -1,0 +1,100 @@
+/* حاوية الفوتر الأساسية - تم زيادة الارتفاع والمساحات */
+footer {
+  background: linear-gradient(135deg, #070a12 0%, #0f1420 100%); /* أغمق وفخم أكثر */
+  padding: 100px 20px; /* زيادة الهاي (الارتفاع) عن طريق زيادة الـ Padding عمودياً */
+  min-height: 450px; /* تحديد حد أدنى للارتفاع لضمان ضخامة السكشن */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35px; /* زيادة المسافة بين الجملة والزرار */
+}
+
+/* التوهج الخلفي خلف الكلام */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+}
+
+/* تنسيق العنوان الرئيسي */
+footer h2 {
+  font-family: 'Cairo', sans-serif;
+  color: #f8fafc;
+  font-size: 2.4rem; /* تكبير الخط الكلي */
+  font-weight: 800;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  line-height: 1.5;
+}
+
+/* 🌟 السحر كله هنا: تمييز إسم الشركة (Next Level) */
+footer h2 .brand-name {
+  /* عمل تدرج لوني يدمج بين الأزرق السماوي والموف المودرن */
+  background: linear-gradient(to right, #38bdf8, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  font-weight: 900;
+  font-size: 2.8rem; /* تكبير اسم الشركة ليكون بارزاً أكثر من باقي الجملة */
+  display: inline-block;
+  letter-spacing: 1px;
+  
+  /* تأثير إضاءة نيون ناعمة خلف النص */
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.2); 
+}
+
+/* تنسيق زرار التسجيل المودرن (Sign Now) */
+footer button {
+  font-family: 'Cairo', sans-serif;
+  background-color: #10b981; 
+  color: #0b0f19; 
+  border: none;
+  padding: 16px 50px; /* زيادة حجم الزرار ليناسب الارتفاع الجديد */
+  font-size: 1.15rem;
+  font-weight: 800;
+  border-radius: 30px; 
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 25px rgba(16, 185, 129, 0.3); 
+  transition: all 0.3s ease-in-out;
+}
+
+footer button:hover {
+  transform: translateY(-4px) scale(1.03); 
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.6); 
+  background-color: #34d399; 
+}
+
+/* للتجاوب مع الموبايل */
+@media (max-width: 768px) {
+  footer {
+    padding: 70px 20px;
+    min-height: 350px;
+  }
+  footer h2 {
+    font-size: 1.7rem;
+  }
+  footer h2 .brand-name {
+    font-size: 2rem;
+    display: block; /* جعل اسم الشركة ينزل في سطر لوحده في الموبايل ليعطي شكلاً منظماً */
+    margin-top: 10px;
+  }
+  footer button {
+    padding: 14px 35px;
+    font-size: 1rem;
+  }
+}

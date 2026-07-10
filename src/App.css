@@ -1,0 +1,53 @@
+/* 1. ريسيت كامل للهوامش والـ Box Sizing لضمان أبعاد هندسية مظبوطة */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. ضبط السكرول ليكون ناعم جداً وانسيابي عند الضغط على اللينكات */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3. تنسيق البودي (جسم الموقع بالكامل) */
+body {
+  background-color: #0b0f19; /* لون الخلفية الداكنة الأساسية لـ Next Level */
+  color: #f8fafc; /* اللون الافتراضي للنصوص (أبيض مريح للعين) */
+  font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden; /* يمنع ظهور سكرول أفقي بيبوظ شكل الديزاين */
+  -webkit-font-smoothing: antialiased; /* تحسين جودة ونقاء الخطوط على الشاشة */
+}
+
+/* 4. حاوية الـ App الرئيسية (اختياري لو عاوز تحكم أدق) */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* يضمن إن السكاشن جوه الـ Home تفرد براحتها وبمسافات متناسقة */
+main, section {
+  width: 100%;
+}
+
+/* 5. تخصيص شكل السكرول بار (Scrollbar) عشان يتماشى مع الدارك مود وميبقاش شكله تقليدي */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f19; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b; 
+  border-radius: 5px;
+  border: 2px solid #0b0f19;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8; /* يتوهج بالأزرق السماوي عند تمرير الماوس */
+}
+
