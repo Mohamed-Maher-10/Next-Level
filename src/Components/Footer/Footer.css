@@ -57,8 +57,9 @@ footer h2 .brand-name {
 }
 
 /* تنسيق زرار التسجيل المودرن (Sign Now) */
-footer button {
+footer a {
   font-family: 'Cairo', sans-serif;
+  text-decoration: none;
   background-color: #10b981; 
   color: #0b0f19; 
   border: none;
@@ -73,7 +74,7 @@ footer button {
   transition: all 0.3s ease-in-out;
 }
 
-footer button:hover {
+footer a:hover {
   transform: translateY(-4px) scale(1.03); 
   box-shadow: 0 8px 30px rgba(16, 185, 129, 0.6); 
   background-color: #34d399; 
@@ -93,7 +94,7 @@ footer button:hover {
     display: block; /* جعل اسم الشركة ينزل في سطر لوحده في الموبايل ليعطي شكلاً منظماً */
     margin-top: 10px;
   }
-  footer button {
+  footer a {
     padding: 14px 35px;
     font-size: 1rem;
   }
