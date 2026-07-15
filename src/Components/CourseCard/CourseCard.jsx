@@ -1,5 +1,4 @@
 import React from 'react'
-import './CourseCard.css'
 
 export default function CourseCard({ logo , title, desc }) {
   return (

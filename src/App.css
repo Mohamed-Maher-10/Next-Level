@@ -1,53 +1,637 @@
-/* 1. ريسيت كامل للهوامش والـ Box Sizing لضمان أبعاد هندسية مظبوطة */
+/* ==========================================================================
+   1. تعريف المتغيرات الذكية للألوان (CSS Variables)
+   ========================================================================== */
+:root {
+  /* ☀️ ألوان الوضع الفاتح المعدلة (Ultra-Clean Ice Blue Theme) */
+  --bg-color: #E0F2FE;                  /* خلفية الصفحة أزرق فاتح جداً وهادئ (Sky 100) */
+  --text-color: #0F172A;                /* نصوص الصفحة الأساسية بلون كحلي داكن جداً */
+  --text-muted: #475569;                /* النصوص الفرعية بلون رمادي متزن */
+  
+  /* 💙 طبقة 1: النبار - تم تغميقه سنة بسيطة مع ظل عميق للفصل عن الهيدر */
+  --nav-bg: linear-gradient(135deg, #13255C 0%, #1D4ED8 100%);   
+  --nav-border: rgba(255, 255, 255, 0.08);     
+  --nav-link-color: #E2E8F0;            /* نصوص فاتحة لتناسب الخلفية الداكنة الجديدة للناف بار */
+  --nav-link-hover: #38BDF8;            /* يضيء بالأزرق السماوي المميز عند التمرير */
+  --nav-link-glow: rgba(56, 189, 248, 0.4);
+  --nav-shadow: 0 10px 30px rgba(15, 23, 42, 0.25); /* ظل يفصل الناف بار تماماً أثناء السكرول فوق الهيدر */
+  
+  /* 💙 طبقة 2: الهيدر - تدرج أزرق حيوي ونشط (Electric Blue) */
+  --header-bg: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 40%, #1E1B4B 100%);
+  --header-text: #ffffff;               
+  --header-glow: rgba(56, 189, 248, 0.25);
+  --neon-gradient: linear-gradient(90deg, #38bdf8, #a78bfa, #38bdf8);
+  --neon-glow-shadow: rgba(56, 189, 248, 0.4);
+  --hero-btn-color: #38bdf8;
+  --hero-btn-border: #38bdf8;
+  --hero-btn-hover-bg: #38bdf8;
+  --hero-btn-hover-text: #090d16;
+  --hero-btn-hover-shadow: rgba(56, 189, 248, 0.5);
+  
+  /* 💙 طبقة 3: الكروت - كروت بيضاء ناصعة تطفو فوق الأزرق الفاتح للموقع */
+  --card-bg: #FFFFFF;                    /* جسم الكارت أبيض صريح لنظافة التصميم */
+  --card-text: #0F172A;                  
+  --card-text-muted: #475569;            
+  --card-border: rgba(15, 23, 42, 0.04);  
+  --card-shadow: 0 10px 30px -5px rgba(30, 58, 138, 0.1), 0 8px 15px -6px rgba(30, 58, 138, 0.05); /* ظل ناعم ومتناسق مع الخلفية الزرقاء */
+  --card-hover-shadow: 0 20px 35px -5px rgba(30, 58, 138, 0.2);
+  --card-hover-border: rgba(37, 99, 235, 0.25);
+  
+  /* خلفية الصورة في الكارت تأخذ نفس تدرج وألوان الهيدر الحيوي */
+  --card-img-bg: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 100%); 
+  --card-img-border: rgba(255, 255, 255, 0.1);
+  
+  /* زرار تبديل المود العائم */
+  --btn-bg: #0b0f19;
+  --btn-border: #ccff00;
+  --btn-glow: rgba(204, 204, 0, 0.25);
+  --btn-glow-hover: rgba(204, 255, 0, 0.45);
+  
+  /* 💙 الفوتر - متناسق مع النبار والهيدر لتقفيل فخم للصفحة */
+  --footer-bg: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 50%, #1E1B4B 100%);
+  --footer-text: #ffffff;
+  --footer-border: rgba(255, 255, 255, 0.08);
+  --footer-glow: rgba(56, 189, 248, 0.15);
+  --brand-gradient: linear-gradient(to right, #38bdf8, #a78bfa);
+  --footer-btn-bg: #10b981;
+  --footer-btn-text: #ffffff;
+  --footer-btn-hover-bg: #059669;
+  --footer-btn-shadow: rgba(16, 185, 129, 0.25);
+  --footer-btn-hover-shadow: rgba(16, 185, 129, 0.55);
+
+  /* السكرول بار */
+  --scrollbar-track: #E0F2FE;
+  --scrollbar-thumb: #93C5FD;
+  --scrollbar-thumb-hover: #1D4ED8;
+}
+
+body.dark {
+  /* 🌙 ألوان الوضع الداكن (مستقرة دون تعديل) */
+  --bg-color: #0b0f19;                  
+  --text-color: #f8fafc;                
+  --text-muted: #94a3b8;                
+  
+  /* النبار */
+  --nav-bg: rgba(11, 15, 25, 0.8);      
+  --nav-border: rgba(255, 255, 255, 0.05);
+  --nav-link-color: #94a3b8;
+  --nav-link-hover: #38bdf8;            
+  --nav-link-glow: rgba(56, 189, 248, 0.4);
+  --nav-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+  /* الهيدر (Header) */
+  --header-bg: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 100%);
+  --header-text: inherit;
+  --header-glow: rgba(56, 189, 248, 0.12);
+  --neon-gradient: linear-gradient(90deg, #ccff00, #00ffcc, #ccff00);
+  --neon-glow-shadow: rgba(204, 255, 0, 0.3);
+  --hero-btn-color: #ccff00;            
+  --hero-btn-border: #ccff00;
+  --hero-btn-hover-bg: #ccff00;
+  --hero-btn-hover-text: #000000;
+  --hero-btn-hover-shadow: rgba(204, 255, 0, 0.6);
+  
+  /* الكروت (Course Cards) */
+  --card-bg: #131a26;                   
+  --card-text: #f8fafc;
+  --card-text-muted: #94a3b8;
+  --card-border: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --card-hover-shadow: rgba(56, 189, 248, 0.15);
+  --card-hover-border: rgba(56, 189, 248, 0.3);
+  --card-img-bg: #0b111e;
+  --card-img-border: rgba(255, 255, 255, 0.05);
+  
+  /* زرار تبديل المود العائم */
+  --btn-bg: #FFFFFF;
+  --btn-border: #CBD5E1;
+  --btn-glow: rgba(30, 58, 138, 0.08);
+  --btn-glow-hover: rgba(30, 58, 138, 0.18);
+  
+  /* الفوتر (Footer) */
+  --footer-bg: linear-gradient(135deg, #070a12 0%, #0f1420 100%);
+  --footer-text: inherit;
+  --footer-border: rgba(255, 255, 255, 0.05);
+  --footer-glow: rgba(56, 189, 248, 0.12);
+  --brand-gradient: linear-gradient(to right, #38bdf8, #a855f7);
+  --footer-btn-bg: #10b981;
+  --footer-btn-text: #0b0f19;
+  --footer-btn-hover-bg: #34d399;
+  --footer-btn-shadow: rgba(16, 185, 129, 0.3);
+  --footer-btn-hover-shadow: rgba(16, 185, 129, 0.6);
+
+  /* السكرول بار */
+  --scrollbar-track: #0b0f19;
+  --scrollbar-thumb: #1e293b;
+  --scrollbar-thumb-hover: #38bdf8;
+}
+
+/* ==========================================================================
+   2. ريسيت التنسيق العام والبودي
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 2. ضبط السكرول ليكون ناعم جداً وانسيابي عند الضغط على اللينكات */
 html {
   scroll-behavior: smooth;
 }
 
-/* 3. تنسيق البودي (جسم الموقع بالكامل) */
 body {
-  background-color: #0b0f19; /* لون الخلفية الداكنة الأساسية لـ Next Level */
-  color: #f8fafc; /* اللون الافتراضي للنصوص (أبيض مريح للعين) */
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
-  overflow-x: hidden; /* يمنع ظهور سكرول أفقي بيبوظ شكل الديزاين */
-  -webkit-font-smoothing: antialiased; /* تحسين جودة ونقاء الخطوط على الشاشة */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* 4. حاوية الـ App الرئيسية (اختياري لو عاوز تحكم أدق) */
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* يضمن إن السكاشن جوه الـ Home تفرد براحتها وبمسافات متناسقة */
 main, section {
   width: 100%;
 }
 
-/* 5. تخصيص شكل السكرول بار (Scrollbar) عشان يتماشى مع الدارك مود وميبقاش شكله تقليدي */
+/* تخصيص السكرول بار */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0f19; 
+  background: var(--scrollbar-track); 
+  transition: background-color 0.4s ease;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b; 
+  background: var(--scrollbar-thumb); 
   border-radius: 5px;
-  border: 2px solid #0b0f19;
+  border: 2px solid var(--scrollbar-track);
+  transition: background-color 0.4s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8; /* يتوهج بالأزرق السماوي عند تمرير الماوس */
+  background: var(--scrollbar-thumb-hover); 
 }
 
+/* ==========================================================================
+   3. تنسيق النبار
+   ========================================================================== */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: var(--nav-bg); 
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow); /* تم ربط متغير الظل الجديد هنا للفصل التام */
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky; 
+  top: 0;
+  z-index: 1000;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nav h2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav .logo {
+  height: 45px; 
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.nav .logo:hover {
+  transform: scale(1.05); 
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: var(--nav-link-color, var(--text-muted)); 
+  font-size: 1rem;
+  font-weight: 600; 
+  font-family: 'Cairo', sans-serif;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+}
+
+.nav ul li a:hover {
+  color: var(--nav-link-hover);
+  text-shadow: 0 0 10px var(--nav-link-glow);
+}
+
+.nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  right: 0;
+  background-color: var(--nav-link-hover);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.nav ul li a:hover::after {
+  width: 100%; 
+}
+
+/* ==========================================================================
+   4. تنسيق الهيدر
+   ========================================================================== */
+header {
+  min-height: 75vh;
+  background: var(--header-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 80px 20px;
+  transition: background 0.4s ease;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--header-glow) 0%, transparent 70%);
+  filter: blur(30px);
+  z-index: 0;
+  transition: background 0.4s ease;
+}
+
+header img {
+  max-width: 280px;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.heroLogo {
+  max-width: 290px;
+  height: auto;
+  z-index: 1;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.2));
+  animation: megaFloat 4s ease-in-out infinite;
+}
+
+@keyframes megaFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-15px) scale(1.03); }
+}
+
+.heroText {
+  font-family: 'Cairo', sans-serif;
+  color: var(--header-text, var(--text-color)); 
+  font-size: 1.8rem;
+  font-weight: 800;
+  max-width: 700px;
+  line-height: 1.6;
+  margin: 0;
+  z-index: 1;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: color 0.4s ease;
+}
+
+.heroText .neonGlowText {
+  background: var(--neon-gradient);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  font-size: 2.2rem;
+  display: inline-block;
+  animation: shineText 3s linear infinite;
+  filter: drop-shadow(0 0 10px var(--neon-glow-shadow));
+  transition: filter 0.4s ease;
+}
+
+@keyframes shineText {
+  to { background-position: 200% center; }
+}
+
+.heroBtn {
+  font-family: 'Cairo', sans-serif;
+  text-decoration: none;
+  background-color: transparent;
+  color: var(--hero-btn-color);
+  border: 3px solid var(--hero-btn-border);
+  padding: 14px 45px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, color 0.4s ease;
+  box-shadow: 0 0 15px var(--neon-glow-shadow);
+}
+
+.heroBtn:hover {
+  background-color: var(--hero-btn-hover-bg);
+  color: var(--hero-btn-hover-text);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--hero-btn-hover-shadow);
+}
+
+.heroBtn:active {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  header {
+    min-height: 60vh;
+    gap: 20px;
+  }
+  .heroLogo {
+    max-width: 210px;
+  }
+  .heroText {
+    font-size: 1.3rem;
+  }
+  .heroText .neonGlowText {
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 5px;
+  }
+  .heroBtn {
+    padding: 12px 35px;
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================================================
+   5. تنسيق الكروت العريضة
+   ========================================================================== */
+.card {
+  display: flex; 
+  flex-direction: row; 
+  align-items: stretch; 
+  background: var(--card-bg); 
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.4s ease;
+  width: 95%; 
+  max-width: 1300px; 
+  margin: 50px auto; 
+  direction: ltr; 
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-shadow);
+  border-color: var(--card-hover-border);
+}
+
+.cardImgDiv {
+  width: 30%; 
+  min-height: 260px; 
+  flex-shrink: 0; 
+  background: var(--card-img-bg); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid var(--card-img-border); 
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.cardImg {
+  max-width: 80%; 
+  max-height: 80%;
+  object-fit: contain; 
+}
+
+.cardTextContainer {
+  flex-grow: 1; 
+  padding: 40px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.cardTextContainer h2 {
+  font-family: 'Cairo', sans-serif;
+  color: var(--card-text); 
+  font-size: 1.7rem; 
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  transition: color 0.4s ease;
+}
+
+.cardTextContainer p {
+  font-family: 'Cairo', sans-serif;
+  color: var(--card-text-muted); 
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0;
+  transition: color 0.4s ease;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column; 
+    align-items: initial;
+    width: 90%;
+  }
+  .cardImgDiv {
+    width: 100%;
+    height: 180px;
+    min-height: 180px;
+    border-right: none;
+    border-bottom: 1px solid var(--card-img-border);
+  }
+  .cardTextContainer {
+    width: 100%;
+    padding: 25px;
+  }
+}
+
+/* ==========================================================================
+   6. زرار التبديل العائم
+   ========================================================================== */
+.theme-toggle-btn {
+  position: fixed; 
+  bottom: 30px;    
+  right: 30px;     
+  z-index: 9999;   
+  
+  background-color: var(--btn-bg); 
+  border: 2px solid var(--btn-border); 
+  cursor: pointer;
+  width: 55px;  
+  height: 55px;
+  border-radius: 50%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.4s ease, border-color 0.4s ease; 
+  box-shadow: 0 10px 25px var(--btn-glow); 
+}
+
+.theme-icon {
+  font-size: 1.5rem;
+  display: inline-block;
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.15) rotate(15deg); 
+  box-shadow: 0 15px 30px var(--btn-glow-hover);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.9);
+}
+
+.sun {
+  animation: scaleIn 0.4s ease-out;
+  filter: drop-shadow(0 0 8px #ffaa00);
+}
+
+.moon {
+  animation: scaleIn 0.4s ease-out;
+  filter: drop-shadow(0 0 8px #ccff00);
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0) rotate(-90deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    bottom: 20px; 
+    right: 20px;
+    width: 48px;  
+    height: 48px;
+  }
+  .theme-icon {
+    font-size: 1.2rem;
+  }
+}
+
+/* ==========================================================================
+   7. تنسيق الفوتر
+   ========================================================================== */
+footer {
+  background: var(--footer-bg);
+  padding: 100px 20px; 
+  min-height: 450px; 
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--footer-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35px; 
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 250px;
+  background: radial-gradient(circle, var(--footer-glow) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+  transition: background 0.4s ease;
+}
+
+footer h2 {
+  font-family: 'Cairo', sans-serif;
+  color: var(--footer-text); 
+  font-size: 2.4rem; 
+  font-weight: 800;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  line-height: 1.5;
+  transition: color 0.4s ease;
+}
+
+footer h2 .brand-name {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  font-weight: 900;
+  font-size: 2.8rem; 
+  display: inline-block;
+  letter-spacing: 1px;
+  text-shadow: 0 0 20px var(--nav-link-glow); 
+}
+
+footer a {
+  font-family: 'Cairo', sans-serif;
+  text-decoration: none;
+  background-color: var(--footer-btn-bg); 
+  color: var(--footer-btn-text); 
+  border: none;
+  padding: 16px 50px; 
+  font-size: 1.15rem;
+  font-weight: 800;
+  border-radius: 30px; 
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 25px var(--footer-btn-shadow); 
+  transition: all 0.3s ease-in-out, background-color 0.4s ease, color 0.4s ease;
+}
+
+footer a:hover {
+  transform: translateY(-4px) scale(1.03); 
+  box-shadow: 0 8px 30px var(--footer-btn-hover-shadow); 
+  background-color: var(--footer-btn-hover-bg); 
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 70px 20px;
+    min-height: 350px;
+  }
+  footer h2 {
+    font-size: 1.7rem;
+  }
+  footer h2 .brand-name {
+    font-size: 2rem;
+    display: block; 
+    margin-top: 10px;
+  }
+  footer a {
+    padding: 14px 35px;
+    font-size: 1rem;
+  }
+}

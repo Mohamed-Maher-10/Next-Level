@@ -4,6 +4,7 @@ import Home from './Pages/Home/Home'
 import { Route , Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './Components/Footer/Footer'
+import DarkModeBtn from './Components/DarkModeBtn/DarkModeBtn'
 
 function App() {
 
@@ -12,9 +13,12 @@ function App() {
 
       <Navbar />
 
+      <DarkModeBtn />
+
       <Home />
     
       <Footer />
+
     </>
   )
 

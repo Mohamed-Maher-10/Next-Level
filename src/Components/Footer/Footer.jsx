@@ -1,11 +1,10 @@
 import React from 'react'
-import './Footer.css'
 
 export default function Footer() {
   return (
     <div>
       
-    <footer>
+    <footer id='sign'>
         <h2>
           Start Learning Now & Reach Your <span className="brand-name">Next Level</span> 🚀
         </h2>
